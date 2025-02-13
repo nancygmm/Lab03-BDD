@@ -53,14 +53,12 @@ class Neo4jMovieGraph:
             result = session.run(query, movie_id=movie_id)
             return [record["m"] for record in result]
 
-# Configurar la conexión a Neo4j AuraDB
 URI = "neo4j+s://86c6d5f0.databases.neo4j.io" 
 USER = "neo4j"  
 PASSWORD = "vCmVaUyXLqUPHQdlCMLHKtlwkBIkd2UfjIQ0fx8-Ius"  
 
 db = Neo4jMovieGraph(URI, USER, PASSWORD)
 
-# Poblar el grafo con usuarios, películas, géneros y personas
 db.create_user(1, "Alice")
 db.create_user(2, "Bob")
 db.create_user(3, "Charlie")
@@ -76,7 +74,6 @@ db.create_person(202, "Jane Smith", {"tmdbId": 67890, "bio": "Renowned director"
 db.create_genre("Sci-Fi")
 db.create_genre("Romance")
 
-# Crear relaciones
 db.create_relationship("User", 1, "Movie", 101, "RATED", {"rating": 5, "timestamp": 16789234})
 db.create_relationship("Person", 201, "Movie", 101, "ACTED_IN", {"role": "Lead Actor"})
 db.create_relationship("Person", 202, "Movie", 101, "DIRECTED", {"role": "Director"})
